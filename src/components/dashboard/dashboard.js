@@ -29,7 +29,7 @@ class DashboardContainer extends Component {
   }
 
   handleUpdateCategory = (category) => {
-    if(!category.title) {
+    if(!category.name) {
       return this.setState({ error: ' need to have a name' })
     }
 
@@ -50,6 +50,12 @@ class DashboardContainer extends Component {
         <CategoryForm 
           handleComplete = {this.handleCreateCategory}
         />
+
+        <div>
+          {this.props.categories.map(category => (
+            <CategoryItem handleUpdate={this.handleUpdateCategory} category={category}/>
+          ))}
+        </div>
       </React.Fragment>
     )
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import './App.css';
 import Dashboard from './components/dashboard/dashboard';
 import { Provider } from 'react-redux';
