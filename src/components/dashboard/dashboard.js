@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import { connect } from 'react-redux';
 import CategoryForm from '../category-form/category-form';
 import CategoryItem from '../category-item/category-item';
+import * as actions from '../../actions/category-actions';
 
 class DashboardContainer extends Component {
   constructor(props) {
@@ -19,9 +19,6 @@ class DashboardContainer extends Component {
       return;
     }
 
-    category._id = uuid();
-    category.made = new Date();
-
     this.props.categoryCreate(category);
     this.setState(({
       error: null,
@@ -33,7 +30,6 @@ class DashboardContainer extends Component {
       return this.setState({ error: ' need to have a name' });
     }
 
-    category.updatedOn = new Date();
     this.props.categoryUpdate(category);
     this.setState(({
       error: null,
@@ -68,8 +64,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  categoryCreate: (category) => dispatch({ type: 'CATEGORY_CREATE', payload: category }),
-  categoryUpdate: (category) => dispatch({ type: 'CATEGORY_UPDATE', payload: category }),
+  categoryCreate: (category) => dispatch(actions.categoryCreate(category)),
+  categoryUpdate: (category) => dispatch(actions.categoryUpdate(category)),
 });
 
 let connector = connect(mapStateToProps, mapDispatchToProps);
