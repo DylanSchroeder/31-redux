@@ -30,7 +30,7 @@ class DashboardContainer extends Component {
 
   handleUpdateCategory = (category) => {
     if(!category.name) {
-      return this.setState({ error: ' need to have a name' })
+      return this.setState({ error: ' need to have a name' });
     }
 
     category.updatedOn = new Date();
@@ -53,11 +53,11 @@ class DashboardContainer extends Component {
 
         <div>
           {this.props.categories.map(category => (
-            <CategoryItem handleUpdate={this.handleUpdateCategory} category={category}/>
+            <CategoryItem handleUpdate={this.handleUpdateCategory} category={category} key={category._id}/>
           ))}
         </div>
       </React.Fragment>
-    )
+    );
   }
 }
 
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
   return {
     categories: state.categories,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   categoryCreate: (category) => dispatch({ type: 'CATEGORY_CREATE', payload: category }),

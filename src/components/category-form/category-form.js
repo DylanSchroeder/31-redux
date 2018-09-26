@@ -57,6 +57,6 @@ export default class CategoryForm extends Component {
           Category
         </button>
       </form>
-    )
+    );
   }
 }
