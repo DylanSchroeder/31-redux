@@ -16,7 +16,7 @@ export default store => next => action => {
       if(!payload.name) {
         return store.dispatch(
           errorActions.errorValidation(
-            'need to have a name'
+            'Categories need to have a name'
           )
         );
       }

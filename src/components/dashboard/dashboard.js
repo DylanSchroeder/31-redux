@@ -1,64 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import CategoryForm from '../category-form/category-form';
 import CategoryItem from '../category-item/category-item';
 import * as actions from '../../actions/category-actions';
 import * as errorActions from '../../actions/error-actions';
 
-class DashboardContainer extends Component {
-  // constructor(props) {
-  //   super(props);
+const DashboardContainer = ({ categories, categoryCreate, categoryUpdate, error }) => 
+  (
+    <React.Fragment>
+      <h2>This is the Dashboard</h2>
+      {error &&
+          <div className='error'>{error}</div>}
 
-  //   this.state = {
-  //     error: null,
-  //   };
-  // }
+      <CategoryForm 
+        handleComplete = {categoryCreate}
+      />
 
-  // handleCreateCategory = (category) => {
-  //   if (!category.name) {
-      
-  //     return this.props.errorValidation('need to have a name');
-  //   }
-  //   this.props.errorClear();
+      <div>
+        {categories.map(category => (
+          <CategoryItem handleUpdate={categoryUpdate} category={category} key={category._id}/>
+        ))}
+      </div>
+    </React.Fragment>
+  );
 
-  //   this.props.categoryCreate(category);
-  //   this.setState(({
-  //     error: null,
-  //   }));
-  // }
-
-  // handleUpdateCategory = (category) => {
-  //   if(!category.name) {
-  //     return this.props.errorValidation('need to have a name');
-  //   }
-  //   this.props.errorClear();
-
-  //   this.props.categoryUpdate(category);
-  //   // this.setState(({
-  //   //   error: null,
-  //   // }));
-  // }
-
-  render() {
-    return (
-      <React.Fragment>
-        <h2>This is the Dashboard</h2>
-        {this.props.error &&
-          <div className='error'>{this.props.error}</div>}
-
-        <CategoryForm 
-          handleComplete = {this.props.categoryCreate}
-        />
-
-        <div>
-          {this.props.categories.map(category => (
-            <CategoryItem handleUpdate={this.props.categoryUpdate} category={category} key={category._id}/>
-          ))}
-        </div>
-      </React.Fragment>
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {

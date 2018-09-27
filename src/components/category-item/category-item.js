@@ -25,7 +25,7 @@ export default class CategoryItem extends Component {
         {category.name} : ${category.budget}
         <CategoryForm category = {category} handleComplete = {this.updateCategory}/>
       </li>
-    )
+    );
   }
 
 }
