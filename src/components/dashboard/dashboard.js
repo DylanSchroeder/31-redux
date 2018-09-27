@@ -14,30 +14,30 @@ class DashboardContainer extends Component {
   //   };
   // }
 
-  handleCreateCategory = (category) => {
-    if (!category.name) {
+  // handleCreateCategory = (category) => {
+  //   if (!category.name) {
       
-      return this.props.errorValidation('need to have a name');
-    }
-    this.props.errorClear();
+  //     return this.props.errorValidation('need to have a name');
+  //   }
+  //   this.props.errorClear();
 
-    this.props.categoryCreate(category);
-    // this.setState(({
-    //   error: null,
-    // }));
-  }
+  //   this.props.categoryCreate(category);
+  //   this.setState(({
+  //     error: null,
+  //   }));
+  // }
 
-  handleUpdateCategory = (category) => {
-    if(!category.name) {
-      return this.props.errorValidation('need to have a name');
-    }
-    this.props.errorClear();
+  // handleUpdateCategory = (category) => {
+  //   if(!category.name) {
+  //     return this.props.errorValidation('need to have a name');
+  //   }
+  //   this.props.errorClear();
 
-    this.props.categoryUpdate(category);
-    // this.setState(({
-    //   error: null,
-    // }));
-  }
+  //   this.props.categoryUpdate(category);
+  //   // this.setState(({
+  //   //   error: null,
+  //   // }));
+  // }
 
   render() {
     return (
@@ -47,12 +47,12 @@ class DashboardContainer extends Component {
           <div className='error'>{this.props.error}</div>}
 
         <CategoryForm 
-          handleComplete = {this.handleCreateCategory}
+          handleComplete = {this.props.categoryCreate}
         />
 
         <div>
           {this.props.categories.map(category => (
-            <CategoryItem handleUpdate={this.handleUpdateCategory} category={category} key={category._id}/>
+            <CategoryItem handleUpdate={this.props.categoryUpdate} category={category} key={category._id}/>
           ))}
         </div>
       </React.Fragment>
