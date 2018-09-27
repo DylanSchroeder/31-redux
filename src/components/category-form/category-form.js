@@ -13,7 +13,7 @@ export default class CategoryForm extends Component {
   }
 
   componentDidUpdate() {
-    console.log('__STATE__', this.state);
+    console.log('__FORM_STATE__', this.state);
   }
 
   handleSubmit = (event) => {
