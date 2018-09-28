@@ -10,9 +10,9 @@ const store = createAppStore();
 
 class App extends Component {
   componentDidMount() {
-    store.subscribe(() => {
-      console.log('__STATE__', store.getState());
-    });
+    // store.subscribe(() => {
+    //   console.log('__STATE__', store.getState());
+    // });
   }
 
 

@@ -57,5 +57,5 @@ describe('category reducer', () => {
       { _id: 1, title: 'UPDATED' },
       { _id: 2, title: 'not update' },
     ]);
-  })
-})
+  });
+});

@@ -1,75 +1,43 @@
-import React, { Component } from 'react';
-import uuid from 'uuid';
+import React from 'react';
 import { connect } from 'react-redux';
 import CategoryForm from '../category-form/category-form';
 import CategoryItem from '../category-item/category-item';
+import * as actions from '../../actions/category-actions';
+import * as errorActions from '../../actions/error-actions';
 
-class DashboardContainer extends Component {
-  constructor(props) {
-    super(props);
+const DashboardContainer = ({ categories, categoryCreate, categoryUpdate, error }) => 
+  (
+    <React.Fragment>
+      <h2>This is the Dashboard</h2>
+      {error &&
+          <div className='error'>{error}</div>}
 
-    this.state = {
-      error: null,
-    };
-  }
+      <CategoryForm 
+        handleComplete = {categoryCreate}
+      />
 
-  handleCreateCategory = (category) => {
-    if (!category.name) {
-      this.setState({ error: 'need to have a name'});
-      return;
-    }
+      <div>
+        {categories.map(category => (
+          <CategoryItem handleUpdate={categoryUpdate} category={category} key={category._id}/>
+        ))}
+      </div>
+    </React.Fragment>
+  );
 
-    category._id = uuid();
-    category.made = new Date();
-
-    this.props.categoryCreate(category);
-    this.setState(({
-      error: null,
-    }));
-  }
-
-  handleUpdateCategory = (category) => {
-    if(!category.name) {
-      return this.setState({ error: ' need to have a name' })
-    }
-
-    category.updatedOn = new Date();
-    this.props.categoryUpdate(category);
-    this.setState(({
-      error: null,
-    }));
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <h2>This is the Dashboard</h2>
-        {this.state.error &&
-          <div className='error'>{this.state.error}</div>}
-
-        <CategoryForm 
-          handleComplete = {this.handleCreateCategory}
-        />
-
-        <div>
-          {this.props.categories.map(category => (
-            <CategoryItem handleUpdate={this.handleUpdateCategory} category={category}/>
-          ))}
-        </div>
-      </React.Fragment>
-    )
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
+    error: state.error,
     categories: state.categories,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  categoryCreate: (category) => dispatch({ type: 'CATEGORY_CREATE', payload: category }),
-  categoryUpdate: (category) => dispatch({ type: 'CATEGORY_UPDATE', payload: category }),
+  errorClear: () => dispatch(errorActions.errorClear()),
+  errorValidation: (error) => dispatch(errorActions.errorValidation(error)),
+  categoryCreate: (category) => dispatch(actions.categoryCreate(category)),
+  categoryUpdate: (category) => dispatch(actions.categoryUpdate(category)),
+
 });
 
 let connector = connect(mapStateToProps, mapDispatchToProps);
