@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 const defaultState = {
   name: '',
-  budget: 0,
+  price: 0,
 };
 
-export default class CategoryForm extends Component {
+export default class ExpenseForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = props.category || defaultState;
+    this.state = props.expense || defaultState;
   }
 
   componentDidUpdate() {
@@ -19,8 +19,8 @@ export default class CategoryForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.handleComplete(this.state);
-
-    if(!this.props.category) {
+    
+    if(!this.props.expense) {
       this.setState(defaultState);
     }
   }
@@ -35,27 +35,27 @@ export default class CategoryForm extends Component {
   render() {
     return (
       <form onSubmit = {this.handleSubmit}>
-        <input
+        <input 
           type = "text"
           name = "name"
-          placeholder = "Category Name"
+          placeholder = "Expense Name"
           value = {this.state.name}
-          onChange = {this.handleChange} 
+          onChange = {this.handleChange}
         />
 
         <input 
           type = "number"
-          name = "budget"
+          name = "price"
           step = "0.01"
-          placeholder = "budget amount"
-          value = {this.state.budget}
+          placeholder = "Expense Price"
+          value = {this.state.price}
           onChange = {this.handleChange}
         />
 
         <button type = "submit">
-          {this.props.category ? 'Update' : 'Create'}
+          {this.props.expense ? 'Update' : 'Create'}
           {' '}
-          Category
+          Expense
         </button>
       </form>
     );
